@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESTIARRANTZA – Association Pêche ESTIA Bidart</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cabin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #D4621A;
+    --orange-light: #E8833A;
+    --beige: #F5EDD8;
+    --dark: #1A1208;
+    --brown: #5C3A1A;
+    --teal: #2A7A8C;
+    --teal-light: #4FA8BC;
+    --gold: #C9941A;
+    --white: #FDFAF4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cabin', sans-serif;
+    background: var(--dark);
+    color: var(--beige);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(26,18,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,98,26,0.3);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 2.5rem;
+  }
+  .nav-logos { display: flex; align-items: center; gap: 1.2rem; }
+  .nav-logos img { height: 42px; }
+  .nav-logos .sep { width: 1px; height: 36px; background: rgba(212,98,26,0.4); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--beige); text-decoration: none; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0d1f25 0%, #1a2a10 40%, #2a1a08 100%);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: 
+      radial-gradient(ellipse 70% 60% at 60% 50%, rgba(42,122,140,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212,98,26,0.12) 0%, transparent 60%);
+  }
+  /* Water waves animation */
+  .wave {
+    position: absolute; bottom: 0; left: 0; width: 200%;
+    height: 120px; opacity: 0.15;
+  }
+  .wave1 { animation: waveMove 8s linear infinite; }
+  .wave2 { animation: waveMove 12s linear infinite reverse; opacity: 0.08; bottom: 20px; }
+  @keyframes waveMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 1.5rem;
+    padding: 8rem 2rem 4rem;
+  }
+  .hero-logo {
+    width: 220px; height: 220px;
+    filter: drop-shadow(0 0 40px rgba(212,98,26,0.5));
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900; letter-spacing: -0.02em;
+    color: var(--beige);
+    line-height: 1;
+  }
+  .hero-title span { color: var(--orange); }
+  .hero-subtitle {
+    font-size: 1rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--teal-light); font-weight: 600;
+  }
+  .hero-tagline {
+    font-size: 1.15rem; color: rgba(245,237,216,0.7);
+    max-width: 520px; line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  }
+  .btn {
+    padding: 0.85rem 2.2rem; border-radius: 4px;
+    font-family: 'Cabin', sans-serif; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--orange); color: var(--white);
+    border: 2px solid var(--orange);
+  }
+  .btn-primary:hover { background: var(--orange-light); border-color: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,98,26,0.4); }
+  .btn-outline {
+    background: transparent; color: var(--beige);
+    border: 2px solid rgba(245,237,216,0.35);
+  }
+  .btn-outline:hover { border-color: var(--teal-light); color: var(--teal-light); transform: translateY(-2px); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1140px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--orange); font-weight: 600; margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+    color: var(--beige); margin-bottom: 1rem;
+  }
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--teal));
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: #0f1a0f; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-photo {
+    position: relative;
+  }
+  .about-photo img {
+    width: 100%; border-radius: 8px;
+    border: 2px solid rgba(212,98,26,0.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .about-photo::before {
+    content: '';
+    position: absolute; inset: -12px; border-radius: 12px;
+    border: 1px solid rgba(79,168,188,0.2);
+    z-index: -1;
+  }
+  .about-text p {
+    color: rgba(245,237,216,0.75); line-height: 1.85; font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+  }
+  .about-badges {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
+  }
+  .badge {
+    padding: 0.45rem 1.1rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .badge-orange { background: rgba(212,98,26,0.2); color: var(--orange-light); border: 1px solid rgba(212,98,26,0.35); }
+  .badge-teal { background: rgba(42,122,140,0.2); color: var(--teal-light); border: 1px solid rgba(42,122,140,0.35); }
+
+  /* ── EVENTS ── */
+  #events { background: var(--dark); }
+  .events-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .event-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(212,98,26,0.35);
+  }
+  .event-type-bar { height: 4px; }
+  .type-peche { background: var(--teal); }
+  .type-rando { background: #4CAF50; }
+  .type-afterwork { background: var(--orange); }
+  .event-body { padding: 1.4rem 1.6rem 1.8rem; }
+  .event-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .event-date {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .event-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; color: var(--beige); margin-bottom: 0.6rem;
+  }
+  .event-desc { font-size: 0.9rem; color: rgba(245,237,216,0.6); line-height: 1.6; }
+  .event-tag {
+    display: inline-block; margin-top: 1rem;
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .tag-peche { background: rgba(42,122,140,0.2); color: var(--teal-light); }
+  .tag-rando { background: rgba(76,175,80,0.15); color: #81C784; }
+  .tag-afterwork { background: rgba(212,98,26,0.2); color: var(--orange-light); }
+
+  .events-cta { text-align: center; margin-top: 3rem; }
+
+  /* ── ADD EVENT FORM ── */
+  #add-event { background: #0d1a12; }
+  .form-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,98,26,0.2);
+    border-radius: 12px; padding: 2.5rem;
+    max-width: 700px; margin: 0 auto;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--orange-light); }
+  input, select, textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px; padding: 0.75rem 1rem;
+    color: var(--beige); font-family: 'Cabin', sans-serif; font-size: 0.95rem;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--orange);
+  }
+  select option { background: #1a1208; }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-submit { margin-top: 1.5rem; text-align: right; }
+
+  /* ── SERVICES / ADHESION ── */
+  #adhesion { background: var(--dark); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 2rem;
+    transition: all 0.25s;
+  }
+  .service-card:hover {
+    border-color: var(--teal);
+    background: rgba(42,122,140,0.08);
+    transform: translateY(-4px);
+  }
+  .service-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: var(--beige); margin-bottom: 0.6rem;
+  }
+  .service-desc { font-size: 0.9rem; color: rgba(245,237,216,0.6); line-height: 1.65; }
+  .service-link {
+    display: inline-block; margin-top: 1.2rem;
+    color: var(--teal-light); font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .service-link:hover { color: var(--orange-light); }
+
+  /* ── ORG CHART ── */
+  #equipe { background: #0a1510; }
+  .org-chart { max-width: 800px; margin: 0 auto; }
+  .org-row { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .org-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 1.4rem 1.8rem;
+    text-align: center; flex: 1; max-width: 240px;
+    transition: all 0.25s;
+  }
+  .org-card:hover { border-color: var(--orange); transform: translateY(-4px); }
+  .org-card.president {
+    border-color: var(--gold); max-width: 280px;
+    background: rgba(201,148,26,0.08);
+  }
+  .org-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin: 0 auto 0.8rem;
+  }
+  .av-gold { background: rgba(201,148,26,0.2); border: 2px solid var(--gold); }
+  .av-orange { background: rgba(212,98,26,0.2); border: 2px solid var(--orange); }
+  .av-teal { background: rgba(42,122,140,0.2); border: 2px solid var(--teal); }
+  .av-green { background: rgba(76,175,80,0.2); border: 2px solid #4CAF50; }
+  .org-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--beige); margin-bottom: 0.3rem;
+  }
+  .org-role {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+  }
+  .org-role.role-vp { color: var(--orange-light); }
+  .org-role.role-tres { color: var(--teal-light); }
+  .org-role.role-sec { color: #81C784; }
+  .org-connector {
+    display: flex; justify-content: center; align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .org-connector::before {
+    content: '';
+    display: block; width: 1px; height: 30px;
+    background: rgba(212,98,26,0.35);
+  }
+  .org-connector-h {
+    display: flex; justify-content: center; margin-bottom: 1rem; gap: 0;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: #0d1208; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--beige); margin-bottom: 1.5rem;
+  }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .contact-ico { font-size: 1.4rem; margin-top: 0.1rem; }
+  .contact-text small { display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); font-weight: 600; }
+  .contact-text p { color: rgba(245,237,216,0.8); margin-top: 0.2rem; font-size: 0.95rem; }
+  .contact-text a { color: var(--teal-light); text-decoration: none; }
+  .contact-text a:hover { color: var(--orange-light); text-decoration: underline; }
+
+  .contact-form .form-card { max-width: 100%; }
+  .contact-form .form-grid { grid-template-columns: 1fr; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070e07;
+    border-top: 1px solid rgba(212,98,26,0.15);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .footer-logos { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-bottom: 1.2rem; }
+  .footer-logos img { height: 36px; opacity: 0.7; }
+  footer p { font-size: 0.82rem; color: rgba(245,237,216,0.35); }
+  footer a { color: rgba(245,237,216,0.5); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0.75rem 1.2rem; }
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .org-row { flex-direction: column; align-items: center; }
+    .org-card { max-width: 100% !important; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logos">
+    <img src="logo_estia.png" alt="ESTIA" />
+    <div class="sep"></div>
+    <img src="logo_asso.png" alt="Estiarrantza" style="height:44px;" />
+  </div>
+  <div class="nav-links">
+    <a href="#about">L'asso</a>
+    <a href="#events">Événements</a>
+    <a href="#adhesion">Adhésion</a>
+    <a href="#equipe">Équipe</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <!-- waves SVG -->
+  <svg class="wave wave1" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,20 1440,40 L1440,120 L0,120 Z" fill="rgba(42,122,140,1)"/>
+  </svg>
+  <svg class="wave wave2" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,60 C240,20 480,80 720,50 C960,20 1200,70 1440,50 L1440,120 L0,120 Z" fill="rgba(42,122,140,1)"/>
+  </svg>
+  <div class="hero-content">
+    <img class="hero-logo" src="logo_asso.png" alt="Logo Estiarrantza" />
+    <div>
+      <div class="hero-subtitle">Association Pêche • ESTIA Bidart</div>
+      <h1 class="hero-title">ESTI<span>ARRANTZA</span></h1>
+    </div>
+    <p class="hero-tagline">La communauté des pêcheurs passionnés de l'ESTIA — Sorties lac, rando-pêche, afterworks et bien plus encore.</p>
+    <div class="hero-cta">
+      <a href="#events" class="btn btn-primary">Voir les événements</a>
+      <a href="#adhesion" class="btn btn-outline">Rejoindre l'asso</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div class="about-photo">
+        <img src="photo_lac.jpg" alt="Sortie pêche au lac" />
+      </div>
+      <div class="about-text">
+        <div class="section-label">Qui sommes-nous ?</div>
+        <h2 class="section-title">L'esprit pêche à l'ESTIA</h2>
+        <div class="divider"></div>
+        <p>Estiarrantza — <em>« la pêche »</em> en basque — est l'association officielle des étudiants pêcheurs de l'ESTIA Bidart, école d'ingénieurs du Pays Basque.</p>
+        <p>Notre mission : partager la passion de la pêche sous toutes ses formes, organiser des sorties mémorables, et créer des liens entre étudiants autour d'une canne à pêche et d'un bon repas.</p>
+        <p>Du bord du lac aux torrents des Pyrénées, des afterworks poisson à la plancha aux randonnées-pêche en montagne — on est là pour ça !</p>
+        <div class="about-badges">
+          <span class="badge badge-orange">🎣 Pêche au coup</span>
+          <span class="badge badge-teal">🏔️ Rando-pêche</span>
+          <span class="badge badge-orange">🐟 À la plancha</span>
+          <span class="badge badge-teal">📚 École d'ingénieurs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="container">
+    <div class="section-label fade-in">Agenda</div>
+    <h2 class="section-title fade-in">Prochains événements</h2>
+    <div class="divider fade-in"></div>
+
+    <div class="events-grid" id="events-grid">
+      <!-- Cards generated by JS -->
+    </div>
+
+    <div class="events-cta fade-in">
+      <p style="color:rgba(245,237,216,0.5); margin-bottom:1rem; font-size:0.9rem;">Tu veux proposer un événement ?</p>
+      <a href="#add-event" class="btn btn-outline">➕ Ajouter un événement</a>
+    </div>
+  </div>
+</section>
+
+<!-- ADD EVENT -->
+<section id="add-event">
+  <div class="container">
+    <div class="section-label fade-in">Organisation</div>
+    <h2 class="section-title fade-in">Proposer un événement</h2>
+    <div class="divider fade-in"></div>
+
+    <div class="form-card fade-in">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nom de l'événement</label>
+          <input type="text" id="ev-name" placeholder="Sortie lac de Brindos…" />
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select id="ev-type">
+            <option value="peche">🎣 Sortie pêche</option>
+            <option value="rando">🏔️ Rando + pêche</option>
+            <option value="afterwork">🐟 Afterwork plancha</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="ev-date" />
+        </div>
+        <div class="form-group">
+          <label>Lieu</label>
+          <input type="text" id="ev-lieu" placeholder="Lac de Brindos, Anglet…" />
+        </div>
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea id="ev-desc" placeholder="Décris l'événement, le programme, ce qu'il faut apporter…"></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button class="btn btn-primary" onclick="addEvent()">Ajouter l'événement 🎣</button>
+      </div>
+      <p id="ev-feedback" style="margin-top:1rem; font-size:0.85rem; color:var(--teal-light); display:none;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ADHESION / SERVICES -->
+<section id="adhesion">
+  <div class="container">
+    <div class="section-label fade-in">Rejoindre l'asso</div>
+    <h2 class="section-title fade-in">Adhésion & Services</h2>
+    <div class="divider fade-in"></div>
+
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">🎫</div>
+        <h3 class="service-title">Adhésion</h3>
+        <p class="service-desc">Rejoins l'association Estiarrantza pour accéder à tous nos événements, bénéficier du matériel prêté et faire partie de la communauté.</p>
+        <a class="service-link" href="mailto:estiarrantza@net.estia.fr?subject=Demande%20d%27adhésion&body=Bonjour%2C%0A%0AJe%20souhaite%20rejoindre%20l%27association%20Estiarrantza.%0A%0AMon%20nom%20%3A%20%0AMon%20année%20%3A%20%0A%0ACordialement.">✉ Envoyer une demande →</a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🎣</div>
+        <h3 class="service-title">Prêt de matériel</h3>
+        <p class="service-desc">Cannes, moulinets, bottes, épuisettes… L'asso dispose d'un stock de matériel disponible au prêt pour les membres cotisants.</p>
+        <a class="service-link" href="mailto:estiarrantza@net.estia.fr?subject=Demande%20de%20prêt%20de%20matériel&body=Bonjour%2C%0A%0AJe%20souhaite%20emprunter%20du%20matériel.%0A%0AMatériel%20souhaité%20%3A%20%0ADates%20%3A%20%0A%0ACordialement.">✉ Demander un prêt →</a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">❓</div>
+        <h3 class="service-title">Questions & Infos</h3>
+        <p class="service-desc">Une question sur un événement, un doute sur la réglementation, ou juste envie d'en savoir plus ? On te répond avec plaisir.</p>
+        <a class="service-link" href="mailto:estiarrantza@net.estia.fr?subject=Question">✉ Nous contacter →</a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">📅</div>
+        <h3 class="service-title">Organiser un événement</h3>
+        <p class="service-desc">Tu as une idée de sortie, un bon coin de pêche à partager, ou envie d'organiser un afterwork ? Contacte-nous pour qu'on le mette en place ensemble !</p>
+        <a class="service-link" href="mailto:estiarrantza@net.estia.fr?subject=Proposition%20d%27événement">✉ Proposer une idée →</a>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem; text-align:center; padding:2rem; border:1px solid rgba(212,98,26,0.25); border-radius:10px; background:rgba(212,98,26,0.05);">
+      <p style="font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:0.5rem;">Contact principal</p>
+      <a href="mailto:estiarrantza@net.estia.fr" style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--beige); text-decoration:none;">estiarrantza@net.estia.fr</a>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE / ORG CHART -->
+<section id="equipe">
+  <div class="container">
+    <div class="section-label fade-in">L'équipe</div>
+    <h2 class="section-title fade-in">Bureau 2025–2026</h2>
+    <div class="divider fade-in"></div>
+
+    <div class="org-chart fade-in">
+      <!-- Président -->
+      <div class="org-row">
+        <div class="org-card president">
+          <div class="org-avatar av-gold">🎖️</div>
+          <div class="org-name">Nicolas Renel</div>
+          <div class="org-role">Président</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <!-- VP -->
+      <div class="org-row">
+        <div class="org-card">
+          <div class="org-avatar av-orange">🤝</div>
+          <div class="org-name">Jean Larguier</div>
+          <div class="org-role role-vp">Vice-Président</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <!-- Trésoriers -->
+      <div class="org-row">
+        <div class="org-card">
+          <div class="org-avatar av-teal">💰</div>
+          <div class="org-name">Clément Clodong</div>
+          <div class="org-role role-tres">Trésorier</div>
+        </div>
+        <div class="org-card">
+          <div class="org-avatar av-teal">💼</div>
+          <div class="org-name">Enzo de Almeida</div>
+          <div class="org-role role-tres">Vice-Trésorier</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <!-- Secrétaires -->
+      <div class="org-row">
+        <div class="org-card">
+          <div class="org-avatar av-green">📝</div>
+          <div class="org-name">Tom Gobance</div>
+          <div class="org-role role-sec">Secrétaire</div>
+        </div>
+        <div class="org-card">
+          <div class="org-avatar av-green">📋</div>
+          <div class="org-name">Gabriel Conté</div>
+          <div class="org-role role-sec">Vice-Secrétaire</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <!-- COM -->
+      <div class="org-row">
+        <div class="org-card" style="border-color: rgba(180,80,220,0.5); background: rgba(180,80,220,0.07);">
+          <div class="org-avatar" style="background: rgba(180,80,220,0.2); border: 2px solid #C06ED4;">📣</div>
+          <div class="org-name">Antoine Duhau</div>
+          <div class="org-role" style="color: #D08AE0;">Responsable Communication</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label fade-in">Nous joindre</div>
+    <h2 class="section-title fade-in">Contact</h2>
+    <div class="divider fade-in"></div>
+
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <h3>On répond vite !</h3>
+        <div class="contact-item">
+          <div class="contact-ico">✉️</div>
+          <div class="contact-text">
+            <small>Email</small>
+            <p><a href="mailto:estiarrantza@net.estia.fr">estiarrantza@net.estia.fr</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-ico">🏫</div>
+          <div class="contact-text">
+            <small>École</small>
+            <p>ESTIA – Institut de Technologie<br/>Technopôle Izarbel, Bidart (64)</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-ico">🎣</div>
+          <div class="contact-text">
+            <small>Pour</small>
+            <p>Adhésion · Prêt matériel<br/>Questions · Événements</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form fade-in">
+        <div class="form-card">
+          <div style="margin-bottom:1.5rem;">
+            <p style="color:rgba(245,237,216,0.65); font-size:0.92rem; line-height:1.7;">Utilise ce formulaire pour nous envoyer un message directement. Il ouvrira ton client mail avec tous les champs pré-remplis.</p>
+          </div>
+          <div class="form-grid" style="grid-template-columns:1fr;">
+            <div class="form-group">
+              <label>Ton prénom & nom</label>
+              <input type="text" id="c-name" placeholder="Jean Dupont" />
+            </div>
+            <div class="form-group">
+              <label>Sujet</label>
+              <select id="c-subject">
+                <option value="Demande d'adhésion">🎫 Adhésion</option>
+                <option value="Demande de prêt de matériel">🎣 Prêt matériel</option>
+                <option value="Question">❓ Question</option>
+                <option value="Proposition d'événement">📅 Proposer un événement</option>
+                <option value="Autre">💬 Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea id="c-msg" placeholder="Bonjour, je voudrais…" style="min-height:120px;"></textarea>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button class="btn btn-primary" onclick="sendContact()">Envoyer ✉️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logos">
+    <img src="logo_estia.png" alt="ESTIA" />
+    <img src="logo_asso.png" alt="Estiarrantza" style="height:44px;" />
+  </div>
+  <p>© 2025 Estiarrantza – Association Pêche de l'<a href="https://www.estia.fr" target="_blank">ESTIA Bidart</a>. Tous droits réservés.</p>
+  <p style="margin-top:0.4rem;"><a href="mailto:estiarrantza@net.estia.fr">estiarrantza@net.estia.fr</a></p>
+</footer>
+
+<script>
+// ── EVENTS DATA ──
+const eventsData = [
+  {
+    name: "Sortie lac de Brindos",
+    type: "peche",
+    date: "2025-05-10",
+    lieu: "Lac de Brindos, Anglet",
+    desc: "Journée pêche au bord du lac avec matériel fourni. Carpe, black-bass et gardons au programme !"
+  },
+  {
+    name: "Rando-pêche en Pyrénnées",
+    type: "rando",
+    date: "2025-05-24",
+    lieu: "Lac d'Artouste",
+    desc: "Montée en téléphérique jusqu'au lac d'Artouste. Pêche à la truite en altitude avec pique-nique !"
+  },
+  {
+    name: "Afterwork Poisson à la Plancha",
+    type: "afterwork",
+    date: "2025-06-06",
+    lieu: "Campus ESTIA, Bidart",
+    desc: "Soirée conviviale : dorades et maquereaux sur la plancha, bières et bonne humeur. Ouvert à tous !"
+  }
+];
+
+const typeMap = {
+  peche: { bar: "type-peche", tag: "tag-peche", label: "🎣 Sortie pêche", icon: "🎣" },
+  rando: { bar: "type-rando", tag: "tag-rando", label: "🏔️ Rando-pêche", icon: "🏔️" },
+  afterwork: { bar: "type-afterwork", tag: "tag-afterwork", label: "🐟 Afterwork plancha", icon: "🐟" }
+};
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + "T12:00:00");
+  return d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+}
+
+function renderEvents() {
+  const grid = document.getElementById('events-grid');
+  const sorted = [...eventsData].sort((a, b) => a.date.localeCompare(b.date));
+  grid.innerHTML = sorted.map(ev => {
+    const t = typeMap[ev.type];
+    return `
+      <div class="event-card">
+        <div class="event-type-bar ${t.bar}"></div>
+        <div class="event-body">
+          <div class="event-icon">${t.icon}</div>
+          <div class="event-date">📅 ${formatDate(ev.date)}</div>
+          <div class="event-name">${ev.name}</div>
+          <div class="event-desc">${ev.desc}<br><br>📍 ${ev.lieu}</div>
+          <span class="event-tag ${t.tag}">${t.label}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function addEvent() {
+  const name = document.getElementById('ev-name').value.trim();
+  const type = document.getElementById('ev-type').value;
+  const date = document.getElementById('ev-date').value;
+  const lieu = document.getElementById('ev-lieu').value.trim();
+  const desc = document.getElementById('ev-desc').value.trim();
+  const fb = document.getElementById('ev-feedback');
+
+  if (!name || !date || !lieu || !desc) {
+    fb.textContent = '⚠️ Merci de remplir tous les champs !';
+    fb.style.color = 'var(--orange)';
+    fb.style.display = 'block';
+    return;
+  }
+
+  eventsData.push({ name, type, date, lieu, desc });
+  renderEvents();
+
+  document.getElementById('ev-name').value = '';
+  document.getElementById('ev-date').value = '';
+  document.getElementById('ev-lieu').value = '';
+  document.getElementById('ev-desc').value = '';
+
+  fb.textContent = '✅ Événement ajouté avec succès !';
+  fb.style.color = 'var(--teal-light)';
+  fb.style.display = 'block';
+  setTimeout(() => { fb.style.display='none'; }, 4000);
+
+  document.getElementById('events').scrollIntoView({ behavior: 'smooth' });
+}
+
+function sendContact() {
+  const name = document.getElementById('c-name').value.trim();
+  const subject = document.getElementById('c-subject').value;
+  const msg = document.getElementById('c-msg').value.trim();
+  const body = `Bonjour,\n\n${msg}\n\nCordialement,\n${name}`;
+  window.location.href = `mailto:estiarrantza@net.estia.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+renderEvents();
+</script>
+</body>
+</html>
